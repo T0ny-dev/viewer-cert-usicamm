@@ -5,11 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Validación de Certificados</title>
   <style>
+
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    h1, h2, p {
+    h1  {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      color: rgb(44, 44, 44);
+    }
+
+    h2, p {
       margin-bottom: 10px;
     }
     .container {
@@ -19,16 +29,70 @@
     #loader {
       display: none;
     }
+
+    .header {
+      background-color:  #0c9585;
+      height: 15vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .check {
+      background-color: #b3e3f4 ;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      margin-left: 5vw;
+      margin-right: 5vw;
+      height: 32px;
+      display: flex;
+      align-items: center;
+    }
+
+    .check span {
+      margin-right: 10px;
+      font-weight: bolder;
+      padding-left: 3vw;
+    }
+
+    .check p {
+      padding: 2px;
+    }
+
+    .header img {
+      width: 65px;
+    }
+
+    #certificateDetails {
+      padding: 5vh 7vw;
+    }
+
+    .sello {
+      display: flex;
+      justify-content: center;
+      padding-top: 5vh;
+    }
+
   </style>
 </head>
 <body>
+  <div class="header">
+      <img src="./img/check.png" alt="check">
+  </div>
   <div class="container">
-    <h1>Validación de Certificados</h1>
+    <h1>Universidad Tamaulipeca</h1>
+    <div class="check">
+      <span>✓</span><p>Verificación exitosa</p>
+    </div>
 
     <!-- Agrega un elemento de carga en tu HTML -->
     <div id="loader">Cargando...</div>
 
-    <div id="certificateDetails"></div>
+    <div id="certificateDetails">
+    </div>
+
+
 
     <script>
       document.addEventListener('DOMContentLoaded', async () => {
@@ -59,6 +123,9 @@
                 <p>Fecha de emisión: ${cert["Fecha de emisión"]}</p>
                 <p>Periodo: ${cert.Periodo}</p>
                 <!-- Agrega más detalles según la estructura de tus datos -->
+                <div class="sello">
+                  <img src="./img/sello.png" alt="">
+                </div>
               `;
             } else {
               // Muestra un mensaje si el certificado no se encuentra
