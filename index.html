@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validación de Certificados</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2, p {
+      margin-bottom: 10px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Validación de Certificados</h1>
+
+    <div id="certificateDetails"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          // Obtiene el ID del certificado de la URL
+          const urlParams = new URLSearchParams(window.location.search);
+          const certId = urlParams.get('id');
+      
+          // Si hay un ID, hace la solicitud a la API
+          if (certId) {
+            fetch(`https://api-cert-utusicamm1.onrender.com/certificates/${certId}`)
+              .then(response => response.json())
+              .then(cert => {
+                if (cert) {
+                  // Muestra los detalles del certificado
+                  const detailsContainer = document.getElementById('certificateDetails');
+                  detailsContainer.innerHTML = `
+                    <h2>${cert.Nombre} ${cert.Apellidos}</h2>
+                    <p>Folio: ${cert.Folio}</p>
+                    <p>Curso: ${cert.Curso}</p>
+                    <p>Horas: ${cert.Horas}</p>
+                    <p>Fecha de emisión: ${cert["Fecha de emisión"]}</p>
+                    <p>Periodo: ${cert.Periodo}</p>
+                    <!-- Agrega más detalles según la estructura de tus datos -->
+                  `;
+                } else {
+                  // Muestra un mensaje si el certificado no se encuentra
+                  document.getElementById('certificateDetails').innerHTML = '<p>Certificado no encontrado</p>';
+                }
+              })
+              .catch(error => {
+                console.error('Error fetching certificate data:', error);
+                document.getElementById('certificateDetails').innerHTML = '<p>Error al cargar los datos del certificado</p>';
+              });
+          } else {
+            // Muestra un mensaje si no se proporciona un ID
+            document.getElementById('certificateDetails').innerHTML = '<p>No se proporcionó un ID de certificado</p>';
+          }
+        });
+      </script>
+      
+  </div>
+</body>
+</html>
